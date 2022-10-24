@@ -1,18 +1,12 @@
-const {createReadStream} = require('fs')
 
-const stream = createReadStream('./content/big.txt', {
-    highWaterMark: 90000, 
-    encoding: 'utf8'
+
+const express = require ('express');
+const app = express();
+
+app.get('/', (req, res)=>{
+    res.json([{name: 'john'}, {name: 'susan'}])
 })
 
-// default 64kb
-// last buffer - remainder
-// highWaterMark - control size
-// const stream createReadStream('./content/big.txt', {highWaterMark: 90000})
-// const stream createReadStream('./content/big.txt', {encoding: 'utf8'})
-
-stream.on('data', (result) => {
-    console.log(result)
+app.listen(5000, () => {
+    console.log('Server is listening on port 5000....')
 })
-
-stream.on('error', (err)=> console.log(err))
